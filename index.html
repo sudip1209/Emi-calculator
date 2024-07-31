@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ========== Start NAVBAR Section ========== -->
+    <header>
+      <div class="section-navbar">
+        <div class="container grid grid-two--cols">
+          <div class="section-navbar--content">
+            <h1 class="nav-heading">Education Loan EMI Calculator</h1>
+            <p class="nav-para">
+              Calculate and compare the actual repayment considering your
+              moratorium period and more!
+            </p>
+          </div>
+          <div class="section-navbar--image" data-aos="fade-up">
+            <img
+              src="calculator-cartoon-removebg-preview (3).png"
+              alt="A 3D character doing coding stuff"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========== End NAVBAR Section ========== -->
+
+    <!-- ========== Start Main ========== -->
+
+    <main>
+      <div class="section-hero">
+        <div class="container grid grid-two--cols">
+          <div class="section-hero--content">
+            <div class="section-hero--subcontent hero-heading--div">
+              <h3 class="hero-heading">
+                Are you enrolled in a multi-year course
+              </h3>
+              <label class="switch">
+                <input type="checkbox" id="toggleButton" required />
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="container dataContainer"></div>
+            <div class="payment-type dataContainer"></div>
+
+            <div
+              class="section-hero--subcontent data-input amount-container loan-amount-container"
+            >
+              <label for="loan-amount">Select Loan Amount for 1 Year</label>
+              <div class="input-container">
+                <span class="symbol">₹</span>
+                <input type="number" id="loan-amount" value="0" required />
+              </div>
+            </div>
+            <div class="range-container loan-amount-range-container">
+              <input
+                type="range"
+                id="amount"
+                name="amount"
+                step="100"
+                min="0"
+                max="5000000"
+                value="0"
+              />
+            </div>
+
+            <div class="section-hero--subcontent data-input year-container">
+              <label for="interest-rate"
+                >Select Interest Rate (Per Annum)</label
+              >
+              <div class="input-container">
+                <span class="symbol">%</span>
+                <input type="number" id="interest-rate" value="0" />
+              </div>
+            </div>
+            <div class="range-container">
+              <input
+                type="range"
+                id="roi"
+                name="roi"
+                step="0.1"
+                min="0"
+                max="30"
+                value="0"
+              />
+            </div>
+
+            <div class="section-hero--subcontent data-input">
+              <label for="loan-period">Moratorium Period/Grace Period</label>
+              <div class="input-container">
+                <select
+                  class="form-select moratorium-container--"
+                  id="month__type"
+                  aria-label="Floating label select example"
+                  required
+                >
+                  <option value="">--Months--</option>
+                  <option value="0">0 (No Grace period)</option>
+                  <option value="1">1 Month</option>
+                  <option value="2">2 Months</option>
+                  <option value="3">3 Months</option>
+                  <option value="4">4 Months</option>
+                  <option value="5">5 Months</option>
+                  <option value="6">6 Months</option>
+                  <option value="7">7 Months</option>
+                  <option value="8">8 Months</option>
+                  <option value="9">9 Months</option>
+                  <option value="10">10 Months</option>
+                  <option value="11">11 Months</option>
+                  <option value="12">12 Months</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="section-hero--subcontent data-input amount-container">
+              <label for="loan-period"
+                >Select Loan Period (Number of Years)</label
+              >
+              <div class="input-container">
+                <span class="symbol">Years</span>
+                <input type="number" id="loan-period" value="0" />
+              </div>
+            </div>
+            <div class="range-container">
+              <input
+                type="range"
+                id="loan-period-range"
+                name="amount"
+                step="1"
+                min="0"
+                max="15"
+                value="0"
+              />
+            </div>
+            <div class="btn">
+              <button id="calculate-button">Calculate</button>
+            </div>
+            <div class="error hidden" id="error-message"></div>
+          </div>
+
+          <div class="section-hero--Graph">
+            <div class="result">
+              <div class="result-content">
+                <div class="result-content--heading">
+                  <h3>Result</h3>
+                </div>
+                <div class="result-content--data">
+                  <div class="result-content--data--item">
+                    <span>Principle</span>
+                    <span id="loan-amount-result">₹ 0</span>
+                  </div>
+                  <div class="result-content--data--item">
+                    <span>Total Interest </span>
+                    <span id="total-interest-result"> ₹ 0</span>
+                  </div>
+                  <div class="result-content--data--item">
+                    <span>Total Amount</span>
+                    <span id="total-payment-result">₹ 0</span>
+                  </div>
+                  <div class="result-content--data--item">
+                    <span>EMI</span>
+                    <span id="emi-result">₹ 0</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ========== End Main Section ========== -->
+
+    <!-- ========== Start Table Section ========== -->
+
+    <section class="table-data">
+      <div class="container">
+        <div id="repayment-schedule"></div>
+      </div>
+      <div class="btn">
+        <button class="hidden" id="download-button">Download CSV</button>
+      </div>
+    </section>
+
+    <!-- ========== End Table Section ========== -->
+
+    <!-- ========== Start   FOOTER Section ========== -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <footer>
+      <div class="container grid">
+        <div class="footer-1--div">
+          <p>Stay Connected!</p>
+
+          <div class="social-footer--icons">
+            <a
+              href="https://www.linkedin.com/in/sudip-sharma-b5816527b/"
+              target="_blank"
+              alt="linkedin"
+            >
+              <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <a
+              href="https://github.com/sudip1209"
+              target="_blank"
+              alt="my github link"
+            >
+              <i class="fa-brands fa-github"></i>
+            </a>
+            <a
+              href="https://x.com/Sudip1209"
+              target="_blank"
+              alt="my instagram profile link"
+            >
+              <i class="fa-brands fa-twitter"></i>
+            </a>
+          </div>
+          <div class="madeby">
+            <h6>Made with ❤️ by SS™</h6>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ========== End   FOOTER Section ========== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
